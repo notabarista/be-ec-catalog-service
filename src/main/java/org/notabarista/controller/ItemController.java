@@ -36,7 +36,7 @@ public class ItemController {
     private IItemService itemService;
 
     @GetMapping("/findAll")
-    public ResponseEntity<Page<Item>> findById(Pageable pageable) throws AbstractNotabaristaException {
+    public ResponseEntity<Page<Item>> findAll(Pageable pageable) throws AbstractNotabaristaException {
         Page<Item> itemPage = this.itemService.findAll(pageable);
         return new ResponseEntity<>(itemPage, HttpStatus.OK);
     }
