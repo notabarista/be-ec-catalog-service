@@ -20,6 +20,20 @@
         <spring-cloud.version>2020.0.2</spring-cloud.version>
         <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
     </properties>
+
+  <repositories>
+    <repository>
+      <id>central</id>
+      <name>Central Repository</name>
+      <url>https://repo.maven.apache.org/maven2</url>
+    </repository>
+    <repository>
+      <id>github</id>
+      <name>Notabarista common-util</name>
+      <url>https://maven.pkg.github.com/notabarista/be-common-util</url>
+    </repository>
+  </repositories>
+
     <dependencies>
 		<dependency>
 			<groupId>org.notabarista</groupId>
@@ -101,5 +115,13 @@
             </plugin>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>Notabarista Github Packages</name>
+            <url>https://maven.pkg.github.com/notabarista/be-ec-catalog-service</url>
+        </repository>
+    </distributionManagement>
 
 </project>
