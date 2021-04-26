@@ -1,0 +1,27 @@
+spring:
+  output:
+    ansi:
+      enabled: DETECT
+  data:
+    mongodb:
+      uri: mongodb+srv://root:password@localhost/test?retryWrites=true&w=majority
+    web:
+      pageable:
+        max-page-size: 100000
+        default-page-size: 100000
+  mvc:
+    log-request-details: true
+  main:
+    allow-bean-definition-overriding: true
+
+eureka:
+  client:
+    enabled: false
+    register-with-eureka: false
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
+    fetchRegistry: true
+    healthcheck:
+      enabled: true
+  instance:
+    instance-id: ${spring.application.name}:${random.int}
