@@ -1,21 +1,19 @@
 package org.notabarista.domain;
 
-import java.util.List;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
-import org.notabarista.domain.abstracts.AbstractAuditedDocument;
-import org.notabarista.enums.ItemStatus;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+import org.notabarista.domain.abstracts.AbstractAuditedDocument;
+import org.notabarista.enums.ItemStatus;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = true, exclude = {})
@@ -38,7 +36,8 @@ public class Item extends AbstractAuditedDocument {
 
     private ItemStatus status;
 
-    private Double rating;
+    private Double avgRating;
+    private Integer nrOfRatings;
 
     @NotNull
     private Seller seller;
