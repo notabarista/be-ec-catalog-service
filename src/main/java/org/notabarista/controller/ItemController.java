@@ -4,6 +4,7 @@ import lombok.extern.log4j.Log4j2;
 import org.notabarista.domain.Item;
 import org.notabarista.exception.AbstractNotabaristaException;
 import org.notabarista.service.IItemService;
+import org.notabarista.util.NABConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -52,7 +53,7 @@ public class ItemController {
     }
 
     @PostMapping
-    public ResponseEntity<Item> insertItem(@NotNull @Valid @RequestBody Item item, @RequestHeader("uid") String userId) throws AbstractNotabaristaException {
+    public ResponseEntity<Item> insertItem(@NotNull @Valid @RequestBody Item item, @RequestHeader(NABConstants.UID_HEADER_NAME) String userId) throws AbstractNotabaristaException {
         Item newItem = this.itemService.insert(item, userId);
         if (newItem != null) {
             return new ResponseEntity<>(newItem, HttpStatus.OK);
@@ -62,7 +63,7 @@ public class ItemController {
     }
 
     @PatchMapping
-    public ResponseEntity<Item> updateItem(@NotNull @Valid @RequestBody Item item, @RequestHeader("uid") String userId) throws AbstractNotabaristaException {
+    public ResponseEntity<Item> updateItem(@NotNull @Valid @RequestBody Item item, @RequestHeader(NABConstants.UID_HEADER_NAME) String userId) throws AbstractNotabaristaException {
         Item newItem = this.itemService.update(item, userId);
         if (newItem != null) {
             return new ResponseEntity<>(newItem, HttpStatus.OK);
