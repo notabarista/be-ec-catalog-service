@@ -58,7 +58,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
           
       - name: Build spring docker image with maven
-        run: mvn spring-boot:build-image -Dspring-boot.build-image.imageName=notabarista/be-ec_catalog-service
+        run: mvn spring-boot:build-image -Dspring-boot.build-image.imageName=notabarista/be-ec-catalog-service
      
       - name: Docker pushing the latest image
-        run: docker image push notabarista/be-ec_catalog-service:latest
+        run: docker image push notabarista/be-ec-catalog-service:latest
