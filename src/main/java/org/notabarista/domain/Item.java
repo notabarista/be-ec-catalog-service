@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @EqualsAndHashCode(callSuper = true, exclude = {})
@@ -42,7 +43,7 @@ public class Item extends AbstractAuditedDocument {
     @NotNull
     private Seller seller;
 
-    private List<String> photos;
+    private Set<String> mediaUrls;
     private List<Label> labels;
 
 }

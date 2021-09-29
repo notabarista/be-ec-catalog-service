@@ -1,6 +1,6 @@
 package org.notabarista.service.impl;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.notabarista.db.ItemRepository;
 import org.notabarista.domain.Item;
 import org.notabarista.domain.elasticsearch.ItemES;
@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Service
-@Slf4j
+@Log4j2
 public class ItemService implements IItemService {
 
     private static final String MODIFIED_AT = "modifiedAt";
