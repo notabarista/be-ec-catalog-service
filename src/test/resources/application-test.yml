@@ -13,6 +13,21 @@ spring:
     log-request-details: true
   main:
     allow-bean-definition-overriding: true
+  kafka:
+    bootstrap-servers: localhost:9094
+    properties:
+      sasl:
+        jaas:
+          config: org.apache.kafka.common.security.scram.ScramLoginModule required username="" password="";
+        mechanism: SCRAM-SHA-256
+      security:
+        protocol: SASL_SSL
+    template:
+      default-topic: mock
+    consumer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      group-id: media-events-listener-group
 
 eureka:
   client:
