@@ -19,6 +19,21 @@ spring:
   liquibase:
     enabled: false
     change-log: classpath:/db/changelog/changelog-master.xml
+  kafka:
+    bootstrap-servers: rocket-01.srvs.cloudkafka.com:9094,rocket-02.srvs.cloudkafka.com:9094,rocket-03.srvs.cloudkafka.com:9094
+    properties:
+      sasl:
+        jaas:
+          config: org.apache.kafka.common.security.scram.ScramLoginModule required username="${CLOUD_KARAFKA_USERNAME}" password="${CLOUD_KARAFKA_PASSWORD}";
+        mechanism: SCRAM-SHA-256
+      security:
+        protocol: SASL_SSL
+    template:
+      default-topic: ${CLOUD_KARAFKA_TOPIC}
+    consumer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      group-id: media-events-listener-group
 
 eureka:
   client:

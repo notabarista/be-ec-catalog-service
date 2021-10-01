@@ -1,7 +1,7 @@
 package org.notabarista.service.impl;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.notabarista.db.elasticsearch.ItemESRepository;
@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 import static org.elasticsearch.index.query.QueryBuilders.multiMatchQuery;
 
 @Service
-@Slf4j
+@Log4j2
 @AllArgsConstructor
 public class ItemESService implements IItemESService {
 
