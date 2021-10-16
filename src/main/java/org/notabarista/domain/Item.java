@@ -11,8 +11,6 @@ import org.notabarista.enums.ItemStatus;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Set;
 
@@ -28,21 +26,13 @@ public class Item extends AbstractAuditedDocument {
     @Id
     private String id;
 
-    @NotBlank
     private String name;
     private String description;
-
-    @NotBlank
     private String code;
-
     private ItemStatus status;
-
     private Double avgRating;
     private Integer nrOfRatings;
-
-    @NotNull
     private Seller seller;
-
     private Set<String> mediaUrls;
     private List<Label> labels;
 
