@@ -19,7 +19,6 @@ public class ReviewDTO {
 
     private String id;
 
-    @NotBlank
     private String itemID;
 
     @NotBlank
@@ -29,7 +28,7 @@ public class ReviewDTO {
     private String description;
 
     @NotNull
-    @Min(0)
+    @Min(1)
     @Max(5)
     private Double itemRating;
 

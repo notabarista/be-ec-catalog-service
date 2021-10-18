@@ -56,25 +56,27 @@ public class ReviewController {
     }
 
     @PostMapping
-    public ResponseEntity<Response<ReviewDTO>> addReview(@NotNull @Valid @RequestBody ReviewDTO reviewDTO, @RequestHeader(NABConstants.UID_HEADER_NAME) String userId) {
+    public ResponseEntity<Response<ReviewDTO>> addReview(@PathVariable @NotBlank String itemID, @NotNull @Valid @RequestBody ReviewDTO reviewDTO, @RequestHeader(NABConstants.UID_HEADER_NAME) String userId) {
         StopWatch watch = new StopWatch();
         watch.start();
         reviewDTO.setUserIdentifier(userId);
+        reviewDTO.setItemID(itemID);
 
         return getItemResponseEntity(reviewService.addReview(reviewDTO), HttpStatus.BAD_REQUEST, watch);
     }
 
     @PutMapping
-    public ResponseEntity<Response<ReviewDTO>> updateReview(@NotNull @Valid @RequestBody ReviewDTO reviewDTO, @RequestHeader(NABConstants.UID_HEADER_NAME) String userId) {
+    public ResponseEntity<Response<ReviewDTO>> updateReview(@PathVariable @NotBlank String itemID, @NotNull @Valid @RequestBody ReviewDTO reviewDTO, @RequestHeader(NABConstants.UID_HEADER_NAME) String userId) {
         StopWatch watch = new StopWatch();
         watch.start();
         reviewDTO.setUserIdentifier(userId);
+        reviewDTO.setItemID(itemID);
 
         return getItemResponseEntity(reviewService.updateReview(reviewDTO), HttpStatus.BAD_REQUEST, watch);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Response<Void>> deleteById(@PathVariable @NotBlank String id) {
+    public ResponseEntity<Response<Void>> deleteById(@PathVariable @NotBlank String itemID, @PathVariable @NotBlank String id) {
         reviewService.deleteReview(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
