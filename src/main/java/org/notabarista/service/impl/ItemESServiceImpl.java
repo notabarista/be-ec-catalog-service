@@ -8,7 +8,7 @@ import org.notabarista.db.elasticsearch.ItemESRepository;
 import org.notabarista.domain.Item;
 import org.notabarista.domain.elasticsearch.ItemES;
 import org.notabarista.mappers.ItemMapper;
-import org.notabarista.service.IItemESService;
+import org.notabarista.service.ItemESService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -26,7 +26,7 @@ import static org.elasticsearch.index.query.QueryBuilders.multiMatchQuery;
 @Service
 @Log4j2
 @AllArgsConstructor
-public class ItemESService implements IItemESService {
+public class ItemESServiceImpl implements ItemESService {
 
     private final ItemESRepository itemESRepository;
     private final ElasticsearchOperations elasticsearchOperations;

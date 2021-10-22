@@ -3,7 +3,7 @@ package org.notabarista.controller.elasticsearch;
 import lombok.extern.log4j.Log4j2;
 import org.notabarista.domain.Item;
 import org.notabarista.exception.AbstractNotabaristaException;
-import org.notabarista.service.IItemESService;
+import org.notabarista.service.ItemESService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,7 +24,7 @@ import javax.validation.constraints.NotBlank;
 public class SearchController {
 
     @Autowired
-    private IItemESService itemESService;
+    private ItemESService itemESService;
 
     @GetMapping("/term/{term}")
     public ResponseEntity<Page<Item>> findBySearchTerm(@PathVariable @NotBlank String term, Pageable pageable) throws AbstractNotabaristaException {

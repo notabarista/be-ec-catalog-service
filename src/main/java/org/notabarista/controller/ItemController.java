@@ -2,11 +2,11 @@ package org.notabarista.controller;
 
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.time.StopWatch;
-import org.notabarista.domain.Item;
+import org.notabarista.controller.dto.ItemDTO;
 import org.notabarista.entity.response.Response;
 import org.notabarista.entity.response.ResponseStatus;
 import org.notabarista.exception.AbstractNotabaristaException;
-import org.notabarista.service.IItemService;
+import org.notabarista.service.ItemService;
 import org.notabarista.util.NABConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -38,24 +38,24 @@ import java.util.List;
 public class ItemController {
 
     @Autowired
-    private IItemService itemService;
+    private ItemService itemService;
 
     @GetMapping("/findAll")
-    public ResponseEntity<Response<Item>> findAll(Pageable pageable) throws AbstractNotabaristaException {
+    public ResponseEntity<Response<ItemDTO>> findAll(Pageable pageable) throws AbstractNotabaristaException {
         StopWatch watch = new StopWatch();
         watch.start();
 
-        Page<Item> itemPage = this.itemService.findAll(pageable);
+        Page<ItemDTO> itemPage = this.itemService.findAll(pageable);
 
         watch.stop();
 
-        return new ResponseEntity<Response<Item>>(new Response<Item>(ResponseStatus.SUCCESS, watch.getTime(), itemPage.getContent(),
+        return new ResponseEntity<>(new Response<>(ResponseStatus.SUCCESS, watch.getTime(), itemPage.getContent(),
                 itemPage.getTotalElements(), itemPage.getPageable().getPageNumber(), itemPage.getTotalPages(),
                 itemPage.getNumberOfElements(), ""), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Response<Item>> findById(@PathVariable @NotBlank String id) throws AbstractNotabaristaException {
+    public ResponseEntity<Response<ItemDTO>> findById(@PathVariable @NotBlank String id) throws AbstractNotabaristaException {
         StopWatch watch = new StopWatch();
         watch.start();
 
@@ -63,7 +63,7 @@ public class ItemController {
     }
 
     @PostMapping
-    public ResponseEntity<Response<Item>> insertItem(@NotNull @Valid @RequestBody Item item, @RequestHeader(NABConstants.UID_HEADER_NAME) String userId) throws AbstractNotabaristaException {
+    public ResponseEntity<Response<ItemDTO>> insertItem(@NotNull @Valid @RequestBody ItemDTO item, @RequestHeader(NABConstants.UID_HEADER_NAME) String userId) throws AbstractNotabaristaException {
         StopWatch watch = new StopWatch();
         watch.start();
 
@@ -71,7 +71,7 @@ public class ItemController {
     }
 
     @PatchMapping
-    public ResponseEntity<Response<Item>> updateItem(@NotNull @Valid @RequestBody Item item, @RequestHeader(NABConstants.UID_HEADER_NAME) String userId) throws AbstractNotabaristaException {
+    public ResponseEntity<Response<ItemDTO>> updateItem(@NotNull @Valid @RequestBody ItemDTO item, @RequestHeader(NABConstants.UID_HEADER_NAME) String userId) throws AbstractNotabaristaException {
         StopWatch watch = new StopWatch();
         watch.start();
 
@@ -84,11 +84,11 @@ public class ItemController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    private ResponseEntity<Response<Item>> getItemResponseEntity(Item newItem, HttpStatus httpStatus, StopWatch watch) {
+    private ResponseEntity<Response<ItemDTO>> getItemResponseEntity(ItemDTO newItem, HttpStatus httpStatus, StopWatch watch) {
         if (newItem != null) {
             watch.stop();
-            List<Item> results = List.of(newItem);
-            return new ResponseEntity<>(Response.<Item>builder()
+            List<ItemDTO> results = List.of(newItem);
+            return new ResponseEntity<>(Response.<ItemDTO>builder()
                                                 .status(ResponseStatus.SUCCESS)
                                                 .data(results)
                                                 .page(1)
