@@ -8,6 +8,7 @@ import org.notabarista.domain.Item;
 import org.notabarista.domain.elasticsearch.ItemES;
 import org.notabarista.entity.response.Response;
 import org.notabarista.exception.AbstractNotabaristaException;
+import org.notabarista.exception.NotFoundException;
 import org.notabarista.mappers.ItemMapper;
 import org.notabarista.service.ItemESService;
 import org.notabarista.service.ItemService;
@@ -62,8 +63,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public ItemDTO findById(String id) {
+        Item item = itemRepository.findById(id).orElseThrow(() -> new NotFoundException("Item not found"));
         List<ReviewDTO> reviews = reviewService.findAll(id, PageRequest.of(0, 50)).getContent();
-        return itemMapper.itemToDTO(itemRepository.findById(id).orElse(null), reviews);
+        return itemMapper.itemToDTO(item, reviews);
     }
 
     @Override
